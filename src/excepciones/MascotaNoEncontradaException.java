@@ -5,14 +5,20 @@
 package excepciones;
 
 /**
+ * Excepción lanzada cuando una mascota no se encuentra en el sistema.
+ *
+ * <p>Se utiliza para señalar búsquedas fallidas de mascotas por su identificador.</p>
  *
  * @author mildr
  */
 public class MascotaNoEncontradaException extends Exception {
-    
-    public MascotaNoEncontradaException(String mensaje) {
 
+    /**
+     * Constructor que crea la excepción con un mensaje descriptivo.
+     *
+     * @param mensaje mensaje que explica el motivo de la excepción
+     */
+    public MascotaNoEncontradaException(String mensaje) {
         super(mensaje);
     }
-    
 }

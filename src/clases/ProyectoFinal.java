@@ -4,17 +4,26 @@
  */
 package clases;
 
+import ui.MainFrame;
+
 /**
+ * Punto de entrada de la aplicación de gestión veterinaria.
+ *
+ * <p>Inicializa la interfaz gráfica de usuario en el hilo de despacho de eventos
+ * de Swing.</p>
  *
  * @author mildr
  */
 public class ProyectoFinal {
 
     /**
-     * @param args the command line arguments
+     * Lanza la aplicación.
+     *
+     * @param args parámetros de línea de comando (no utilizados)
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            new MainFrame().setVisible(true);
+        });
     }
-    
 }

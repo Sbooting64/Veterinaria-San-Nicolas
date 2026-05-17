@@ -5,35 +5,65 @@
 package clases;
 
 /**
+ * Representa un perro registrado en la veterinaria.
+ *
+ * <p>Extiende la clase {@link Mascota} y agrega información específica
+ * como la raza.</p>
  *
  * @author mildr
  */
-public class Perro extends Mascota{
-    
+public class Perro extends Mascota {
+
     private String raza;
-    
-    public Perro(){
-        
+
+    /**
+     * Constructor vacío para compatibilidad con frameworks.
+     */
+    public Perro() {
     }
-    
-    public Perro(String id, String nombre, int edad, Dueno dueno, String raza){
+
+    /**
+     * Crea un perro con los datos completos.
+     *
+     * @param id identificador de la mascota
+     * @param nombre nombre del perro
+     * @param edad edad en años
+     * @param dueno dueño responsable
+     * @param raza raza del perro
+     */
+    public Perro(String id, String nombre, int edad, Dueno dueno, String raza) {
         super(id, nombre, edad, dueno);
         this.raza = raza;
     }
-    
+
     @Override
     public String obtenerCuidadosBasicos() {
         return "Vacunas, paseo diario y baño.";
     }
 
+    /**
+     * Simula el sonido que hace el perro.
+     *
+     * @return una cadena con el ladrido del perro
+     */
     public String ladrar() {
         return "Guau Guau";
     }
 
+    /**
+     * Obtiene la raza del perro.
+     *
+     * @return la raza del perro
+     */
     public String getRaza() {
         return raza;
     }
 
+    /**
+     * Establece la raza del perro.
+     *
+     * @param raza la raza a asignar
+     */
     public void setRaza(String raza) {
         this.raza = raza;
     }
