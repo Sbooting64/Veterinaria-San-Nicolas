@@ -7,8 +7,8 @@ package clases;
 /**
  * Clase base para las mascotas registradas en la veterinaria.
  *
- * <p>Define los atributos comunes a todas las mascotas, como identificador,
- * nombre, edad y el dueño asociado.</p>
+ * Define los atributos comunes a todas las mascotas, como identificador,
+ * nombre, edad y el dueño asociado.
  *
  * @author mildr
  */

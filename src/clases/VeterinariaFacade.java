@@ -4,6 +4,8 @@
  */
 package clases;
 
+import excepciones.CitaTraslapadaException;
+import excepciones.MascotaNoEncontradaException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +14,8 @@ import java.util.Map;
 /**
  * Implementación de la lógica central de la veterinaria.
  *
- * <p>Este facade administra los registros de dueños, mascotas y citas, ofreciendo
- * operaciones sencillas para el resto de la aplicación.</p>
+ * Este facade administra los registros de dueños, mascotas y citas, ofreciendo
+ * operaciones sencillas para el resto de la aplicación.
  *
  * @author mildr
  */
@@ -41,16 +43,27 @@ public class VeterinariaFacade implements IVeterinaria {
     }
 
     @Override
-    public void agendarCita(Cita cita) {
-        if (cita != null) {
-            citas.add(cita);
+    public void agendarCita(Cita cita) throws CitaTraslapadaException {
+        if (cita == null || cita.getMascota() == null || cita.getFechaHora() == null) {
+            return;
         }
+
+        for (Cita existente : citas) {
+            if (existente != null && existente.getMascota() != null && existente.getFechaHora() != null
+                    && existente.getMascota().getId().equals(cita.getMascota().getId())
+                    && existente.getFechaHora().equals(cita.getFechaHora())) {
+                throw new CitaTraslapadaException("Ya existe una cita programada para esta mascota en la misma fecha y hora.");
+            }
+        }
+
+        citas.add(cita);
+        mascotas.put(cita.getMascota().getId(), cita.getMascota());
     }
 
     @Override
-    public Mascota buscarMascota(String id) {
-        if (id == null) {
-            return null;
+    public Mascota buscarMascota(String id) throws MascotaNoEncontradaException {
+        if (id == null || id.trim().isEmpty()) {
+            throw new MascotaNoEncontradaException("El identificador de mascota no puede estar vacío.");
         }
 
         Mascota mascota = mascotas.get(id);
@@ -59,22 +72,33 @@ public class VeterinariaFacade implements IVeterinaria {
         }
 
         for (Cita c : citas) {
-            if (c != null && c.getMascota() != null && id.equals(c.getMascota().getId())) {
+            if (c != null && c.getMascota() != null && c.getMascota().getId() != null
+                    && id.equals(c.getMascota().getId())) {
                 return c.getMascota();
             }
         }
 
-        return null;
+        throw new MascotaNoEncontradaException("No se encontró una mascota con el ID especificado: " + id);
     }
 
     @Override
-    public List<Cita> buscarHistorial(String idMascota) {
+    public List<Cita> buscarHistorial(String idMascota) throws MascotaNoEncontradaException {
+        if (idMascota == null || idMascota.trim().isEmpty()) {
+            throw new MascotaNoEncontradaException("El identificador de mascota no puede estar vacío.");
+        }
+
+        boolean mascotaExiste = mascotas.containsKey(idMascota);
         List<Cita> historial = new ArrayList<>();
 
         for (Cita c : citas) {
-            if (c.getMascota().getId().equals(idMascota)) {
+            if (c != null && c.getMascota() != null && idMascota.equals(c.getMascota().getId())) {
                 historial.add(c);
+                mascotaExiste = true;
             }
+        }
+
+        if (!mascotaExiste) {
+            throw new MascotaNoEncontradaException("No se encontró una mascota con el ID especificado: " + idMascota);
         }
 
         return historial;

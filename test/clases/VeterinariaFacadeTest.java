@@ -1,5 +1,7 @@
 package clases;
 
+import excepciones.MascotaNoEncontradaException;
+import excepciones.CitaTraslapadaException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +26,7 @@ public class VeterinariaFacadeTest {
     }
 
     @Test
-    public void testRegistrarMascotaYBuscarPorId() {
+    public void testRegistrarMascotaYBuscarPorId() throws MascotaNoEncontradaException {
         veterinaria.registrarMascota(perro);
 
         Mascota resultado = veterinaria.buscarMascota("P001");
@@ -35,13 +37,13 @@ public class VeterinariaFacadeTest {
         assertEquals("José Pérez", resultado.getDueno().getNombre());
     }
 
-    @Test
-    public void testBuscarMascotaDesconocidaDevuelveNull() {
-        assertNull("Una búsqueda por ID desconocido debe devolver null.", veterinaria.buscarMascota("NO_EXISTE"));
+    @Test(expected = MascotaNoEncontradaException.class)
+    public void testBuscarMascotaDesconocidaLanzaExcepcion() throws MascotaNoEncontradaException {
+        veterinaria.buscarMascota("NO_EXISTE");
     }
 
     @Test
-    public void testAgendarCitaYBuscarHistorial() {
+    public void testAgendarCitaYBuscarHistorial() throws MascotaNoEncontradaException, CitaTraslapadaException {
         veterinaria.registrarMascota(gato);
 
         Cita cita1 = new Cita(1, LocalDateTime.now().plusDays(1), gato, "Vacunación");
@@ -59,7 +61,7 @@ public class VeterinariaFacadeTest {
     }
 
     @Test
-    public void testBuscarMascotaPorCitaSinRegistroDirecto() {
+    public void testBuscarMascotaPorCitaSinRegistroDirecto() throws MascotaNoEncontradaException, CitaTraslapadaException {
         Cita cita = new Cita(3, LocalDateTime.now().plusDays(3), perro, "Consulta");
         veterinaria.agendarCita(cita);
 

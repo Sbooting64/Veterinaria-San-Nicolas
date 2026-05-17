@@ -7,7 +7,7 @@ package clases;
 /**
  * Representa un gato registrado en la veterinaria.
  *
- * <p>Extiende la clase {@link Mascota} y agrega el indicador de si es doméstico.</p>
+ * Extiende la clase {@link Mascota} y agrega el indicador de si es doméstico.
  *
  * @author mildr
  */

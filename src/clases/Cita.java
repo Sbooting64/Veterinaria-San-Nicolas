@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 /**
  * Representa una cita médica agendada para una mascota.
  *
- * <p>Incluye la fecha y hora de la cita, la mascota a atender y el motivo
- * de la consulta.</p>
+ * Incluye la fecha y hora de la cita, la mascota a atender y el motivo
+ * de la consulta.
  *
  * @author mildr
  */

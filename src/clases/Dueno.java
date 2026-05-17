@@ -7,8 +7,8 @@ package clases;
 /**
  * Representa al dueño de una mascota.
  *
- * <p>Contiene los datos personales básicos del propietario, como identificación,
- * nombre, teléfono y dirección.</p>
+ * Contiene los datos personales básicos del propietario, como identificación,
+ * nombre, teléfono y dirección.
  *
  * @author mildr
  */

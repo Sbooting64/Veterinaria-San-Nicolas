@@ -7,8 +7,8 @@ package clases;
 /**
  * Representa un perro registrado en la veterinaria.
  *
- * <p>Extiende la clase {@link Mascota} y agrega información específica
- * como la raza.</p>
+ * Extiende la clase {@link Mascota} y agrega información específica
+ * como la raza.
  *
  * @author mildr
  */

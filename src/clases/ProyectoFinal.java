@@ -9,8 +9,8 @@ import ui.MainFrame;
 /**
  * Punto de entrada de la aplicación de gestión veterinaria.
  *
- * <p>Inicializa la interfaz gráfica de usuario en el hilo de despacho de eventos
- * de Swing.</p>
+ * Inicializa la interfaz gráfica de usuario en el hilo de despacho de eventos
+ * de Swing.<
  *
  * @author mildr
  */
